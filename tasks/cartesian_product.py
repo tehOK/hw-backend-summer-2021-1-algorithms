@@ -11,3 +11,4 @@ T2 = TypeVar("T2")
 
 def cartesian_product(arr1: list[T1], arr2: list[T2]) -> list[tuple[T1, T2]]:
     return list(product(arr1, arr2))
+
