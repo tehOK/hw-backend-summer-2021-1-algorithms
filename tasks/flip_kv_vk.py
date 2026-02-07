@@ -11,28 +11,21 @@ KV = TypeVar("KV")
 
 
 def flip_kv_vk(d: dict[KT, KV]) -> dict[KV, KT]:
-    """Формирует словарь, в котором в качестве ключей - значения
-    переданного словаря, а в качестве значений - ключи.
+    new_d: dict[KV, KT] = dict()
 
-    Example:
-        >> flip_kv_vk({'tokyo': 'Токио', 'moscow': 'Москва'})
-        {
-            'Токио': 'tokyo',
-            'Москва': 'moscow',
-        }
-    """
-    raise NotImplementedError
+    for key, value in d.items():
+        new_d[value] = key
+
+    return new_d
 
 
 def flip_kv_vk_safe(d: dict[KT, KV]) -> dict[KV, list[KT]]:
-    """Формирует словарь, в котором в качестве ключей - значения
-    переданного словаря, а в качестве значений - список ключей,
-    конфликтующих значений.
+    new_d: dict[KV, list[KT]] = dict()
 
-    Example:
-        >> flip_kv_vk({'Санкт-Петербург': '+3', 'Москва': '+3'})
-        {
-            '+3': ['Москва', 'Санкт-Петербург'],
-        }
-    """
-    raise NotImplementedError
+    for key, value in d.items():
+        if value in new_d:
+            new_d[value].append(key)
+        else:
+            new_d[value] = [key]
+
+    return new_d
